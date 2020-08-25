@@ -8,7 +8,7 @@
         <van-tabbar v-model="active" @change="onChange" click="clickTab">
           <van-tabbar-item name="home" icon="upgrade">反馈问题</van-tabbar-item>
           <van-tabbar-item name="watchList" icon="search" :info="infoNum">查看问题</van-tabbar-item>
-          <van-tabbar-item name="listen" icon="audio">听力</van-tabbar-item>
+          <van-tabbar-item name="listenTab" icon="audio">听力</van-tabbar-item>
         </van-tabbar>
       </van-sticky>
     </div>
@@ -18,7 +18,7 @@
 import create from "@/view/issue/create";
 import watchList from "@/view/issue/watchList";
 import login from "@/view/issue/login";
-import listen from "@/view/issue/listen";
+import listenTab from "@/view/issue/listenTab";
 export default {
   name: "mainPage",
   data() {
@@ -26,13 +26,13 @@ export default {
       page: create,
       infoNum: 0,
       active: "home",
-      components: { create, watchList, login, listen }
+      components: { create, watchList, login, listenTab }
     };
   },
   methods: {
     onChange(name) {
       this.page =
-        name == "home" ? create : name == "watchList" ? watchList : listen;
+        name == "home" ? create : name == "watchList" ? watchList : listenTab;
     },
     getNum() {
       var user = JSON.parse(window.sessionStorage.getItem("user"));
@@ -67,9 +67,9 @@ export default {
       if (from.name == "detail") {
         vm.active = "search";
         vm.page = watchList;
-      } else if (from.name == "listenScript") {
-        vm.active = "listen";
-        vm.page = listen;
+      } else if (from.name == "listenTabScript") {
+        vm.active = "listenTab";
+        vm.page = listenTab;
       }
     });
   }
