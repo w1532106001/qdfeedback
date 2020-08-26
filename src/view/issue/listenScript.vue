@@ -8,12 +8,13 @@
     </van-cell>
 
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh" v-if="wordScriptInfo!=null">
-      <van-list  :finished="finished" finished-text="没有更多了">
+      <van-list :finished="finished" finished-text="没有更多了">
         <van-cell v-for="(item,scriptIndex) in wordScriptInfo.scriptInfoList" :key="item.scriptid">
           <div>
             <van-row :style="{background: 'gray'}">
               <van-col span="4">英文：</van-col>
               <van-col span="16">{{item.script_eng}}</van-col>
+
               <van-col span="4">
                 <van-loading
                   type="spinner"
@@ -29,6 +30,10 @@
                   size="50"
                 />
               </van-col>
+            </van-row>
+            <van-row :style="{background: 'gray'}">
+              <van-col span="4">中文：</van-col>
+              <van-col span="16">{{item.script_chn}}</van-col>
             </van-row>
             <van-row>
               <van-col span="6">
@@ -134,8 +139,8 @@ export default {
               //     element2.isPlaying = false;
               //   });
               // });
-              if(self.wordScriptInfo.scriptInfoList.length<=0){
-                self.finished = true
+              if (self.wordScriptInfo.scriptInfoList.length <= 0) {
+                self.finished = true;
               }
             }
           }
