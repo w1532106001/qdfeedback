@@ -152,6 +152,7 @@ export default {
           this.hideLoading();
         })
         .catch((err) => {
+          this.hideLoading();
           console.error(err);
         });
     },
