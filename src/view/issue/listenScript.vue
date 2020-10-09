@@ -1,73 +1,98 @@
 <template>
   <div>
-    <Header :title="'核心单词:'+coreWord"></Header>
+    <Header :title="'核心单词:' + coreWord"></Header>
     <van-cell center title="是否需要弹窗：">
       <template #right-icon>
         <van-switch v-model="isNeedDialog" size="24" />
       </template>
     </van-cell>
 
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh" v-if="wordScriptInfo!=null">
+    <van-pull-refresh
+      v-model="refreshing"
+      @refresh="onRefresh"
+      v-if="wordScriptInfo != null"
+    >
       <van-list :finished="finished" finished-text="没有更多了">
-        <van-cell v-for="(item,scriptIndex) in wordScriptInfo.scriptInfoList" :key="item.scriptid">
+        <van-cell
+          v-for="(item, scriptIndex) in wordScriptInfo.scriptInfoList"
+          :key="item.scriptid"
+        >
           <div>
-            <van-row :style="{background: 'gray'}">
+            <van-row :style="{ background: 'gray' }">
               <van-col span="4">英文：</van-col>
-              <van-col span="16">{{item.script_eng}}</van-col>
+              <van-col span="16">{{ item.script_eng }}</van-col>
 
               <van-col span="4">
                 <van-loading
                   type="spinner"
                   color="#1989fa"
-                  v-if="item.isPlaying=='loading'"
+                  v-if="item.isPlaying == 'loading'"
                   size="50"
                 />
 
                 <van-icon
                   v-else
-                  :name="item.isPlaying=='true'?'stop-circle-o':'play-circle-o'"
-                  @click="playAudio(item,scriptIndex)"
+                  :name="
+                    item.isPlaying == 'true' ? 'stop-circle-o' : 'play-circle-o'
+                  "
+                  @click="playAudio(item, scriptIndex)"
                   size="50"
                 />
               </van-col>
             </van-row>
-            <van-row :style="{background: 'gray'}">
+            <van-row :style="{ background: 'gray' }">
               <van-col span="4">中文：</van-col>
-              <van-col span="16">{{item.script_chn}}</van-col>
+              <van-col span="16">{{ item.script_chn }}</van-col>
             </van-row>
-            <van-row :style="{background: 'gray'}">
+            <van-row :style="{ background: 'gray' }">
               <van-col span="4">出处：</van-col>
-              <van-col span="16">{{item.title_chinese}}---{{item.subtitle_english}}</van-col>
+              <van-col span="16"
+                >{{ item.title_chinese }}---{{ item.subtitle_english }}</van-col
+              >
             </van-row>
-               <van-row :style="{background: 'gray'}">
-              <van-col span="4">脚本id:</van-col>
-              <van-col span="16">{{item.scriptid}}</van-col>
+            <van-row :style="{ background: 'gray' }">
+              <van-col span="4">脚本id:{{ item.scriptid }}</van-col>
+              <van-col span="4">mediaId:{{ item.mediaid }}</van-col>
             </van-row>
             <van-row>
               <van-col span="6">
-                <van-button @click="updateListenStatus(item,0,scriptIndex)">正确</van-button>
+                <van-button @click="updateListenStatus(item, 0, scriptIndex)"
+                  >正确</van-button
+                >
               </van-col>
               <van-col span="12">
-                <van-button @click="updateListenStatus(item,1,scriptIndex)">核心单词没有在音频中</van-button>
+                <van-button @click="updateListenStatus(item, 1, scriptIndex)"
+                  >核心单词没有在音频中</van-button
+                >
               </van-col>
               <van-col span="6">
-                <van-button @click="updateListenStatus(item,2,scriptIndex)">歌曲</van-button>
+                <van-button @click="updateListenStatus(item, 2, scriptIndex)"
+                  >歌曲</van-button
+                >
               </van-col>
             </van-row>
             <van-row>
               <van-col span="12">
-                <van-button @click="updateListenStatus(item,3,scriptIndex)">例句重复</van-button>
+                <van-button @click="updateListenStatus(item, 3, scriptIndex)"
+                  >例句重复</van-button
+                >
               </van-col>
               <van-col span="12">
-                <van-button @click="updateListenStatus(item,4,scriptIndex)">例句翻译有误</van-button>
+                <van-button @click="updateListenStatus(item, 4, scriptIndex)"
+                  >例句翻译有误</van-button
+                >
               </van-col>
             </van-row>
             <van-row>
               <van-col span="12">
-                <van-button @click="updateListenStatus(item,5,scriptIndex)">例句切割不完整</van-button>
+                <van-button @click="updateListenStatus(item, 5, scriptIndex)"
+                  >例句切割不完整</van-button
+                >
               </van-col>
               <van-col span="12">
-                <van-button @click="updateListenStatus(item,6,scriptIndex)">不要</van-button>
+                <van-button @click="updateListenStatus(item, 6, scriptIndex)"
+                  >不要</van-button
+                >
               </van-col>
             </van-row>
           </div>
@@ -86,7 +111,11 @@
       </van-collapse-item>
     </van-collapse>-->
     <!-- 通用错误 -->
-    <van-empty v-else image="error" :description="'数据异常scriptId:'+wordId" />
+    <van-empty
+      v-else
+      image="error"
+      :description="'数据异常scriptId:' + wordId"
+    />
   </div>
 </template>
 <script>
