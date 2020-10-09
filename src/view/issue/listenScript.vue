@@ -39,6 +39,10 @@
               <van-col span="4">出处：</van-col>
               <van-col span="16">{{item.title_chinese}}---{{item.subtitle_english}}</van-col>
             </van-row>
+               <van-row :style="{background: 'gray'}">
+              <van-col span="4">脚本id:</van-col>
+              <van-col span="16">{{item.scriptid}}</van-col>
+            </van-row>
             <van-row>
               <van-col span="6">
                 <van-button @click="updateListenStatus(item,0,scriptIndex)">正确</van-button>

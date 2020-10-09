@@ -9,7 +9,7 @@
       >
         <van-col span="6">{{item.wordName}}</van-col>
         <van-col span="6">序号({{item.sort}})</van-col>
-        <van-col span="6">{{getHandlerName(item.sort)}}</van-col>
+        <!-- <van-col span="6">{{getHandlerName(item.sort)}}</van-col> -->
       </van-cell>
     </div>
   </van-index-bar>
